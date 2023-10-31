@@ -2,14 +2,16 @@ import styles from './page.module.css'
 import EventCard from '@/components/EventCard/EventCard'
 import { Grid } from '@mui/material'
 import { DataProduct, TrackingScenario } from '@/data/types';
-import AddTrackingScenario from './AddTrackingScenario';
+import AddTrackingScenario from '../../../components/AddTrackingScenario/AddTrackingScenario';
+import { useState } from 'react';
+import Xarrow from "react-xarrows";
 
 interface Props {
     params: { id: string }
 }
 
 export default async function TemplateBuilderPage({ params }: Props) {
-    const dataProduct: DataProduct = await fetch(`https://console.snowplowanalytics.com/api/msc/v1/organizations/3883f10d-d184-4c33-af53-32ae57aaf14b/data-products/v1/${params.id}`, {
+    const dataProduct: DataProduct = await fetch(`${process.env.HOMEPAGE}/organizations/${process.env.ORGANIZATION_ID}/data-products/v1/${params.id}`, {
         method: 'GET',
         headers: {
             "accept": "application/json",
@@ -20,7 +22,6 @@ export default async function TemplateBuilderPage({ params }: Props) {
         (res) => res.json()
     )
     const trackingScenarios = dataProduct.includes.trackingScenarios
-    // const dataProduct = dataProductList.find((dataProduct) => dataProduct.id === params.id)
 
 
     // read in the saved tracking scenarios
@@ -36,13 +37,14 @@ export default async function TemplateBuilderPage({ params }: Props) {
                 container
                 alignItems={"flex-start"}
                 justifyContent={"space-around"}
-                columnGap={1}
-                rowGap={1}
+                columnGap={4}
+                rowGap={5}
                 sx={{ margin: "0 auto" }}
             >
                 {trackingScenarios.map((trackingScenario: TrackingScenario) => (
                     <EventCard key={trackingScenario.id} trackingScenario={trackingScenario} params={params} />
                 ))}
+
                 <AddTrackingScenario id={params.id} />
             </Grid>
         </div>

@@ -1,3 +1,4 @@
+import CreateDataProduct from "@/components/CreateDataProduct/CreateDataProduct";
 import Link from "next/link";
 
 export default async function TemplatesPage() {
@@ -16,6 +17,7 @@ export default async function TemplatesPage() {
                     </li>
                 ))}
             </ul>
+            <CreateDataProduct />
         </div>
     )
 }
