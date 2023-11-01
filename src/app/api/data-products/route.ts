@@ -1,18 +1,5 @@
 import { NextResponse } from "next/server"
 
-// export async function GET() {
-//     const res = await fetch(`${process.env.HOMEPAGE}/organizations/${process.env.ORGANIZATION_ID}/data-products/v1`, {
-//         method: 'GET',
-//         headers: {
-//             "accept": "application/json",
-//             "Authorization": `Bearer ${process.env.ACCESS_TOKEN}`
-//         }
-//     }
-//     )
-//     const data = await res.json()
-//     return NextResponse.json(data.data)
-// }
-
 export async function POST(req: Request) {
     const userInput = await req.json()
     const res = await fetch(`${process.env.HOMEPAGE}/organizations/${process.env.ORGANIZATION_ID}/data-products/v1`, {
@@ -26,8 +13,8 @@ export async function POST(req: Request) {
         body: JSON.stringify({
             name: userInput.name,
             description: userInput.description,
-            domain: "ActivationEngineering",
-            owner: "Engineering",
+            domain: userInput.domain,
+            owner: userInput.owner,
             accessInstructions: userInput.description,
             status: "draft"
         }),
@@ -35,3 +22,17 @@ export async function POST(req: Request) {
     const data = await res.json()
     return NextResponse.json(data)
 }
+
+
+// export async function GET() {
+//     const res = await fetch(`${process.env.HOMEPAGE}/organizations/${process.env.ORGANIZATION_ID}/data-products/v1`, {
+//         method: 'GET',
+//         headers: {
+//             "accept": "application/json",
+//             "Authorization": `Bearer ${process.env.ACCESS_TOKEN}`
+//         }
+//     }
+//     )
+//     const data = await res.json()
+//     return NextResponse.json(data.data)
+// }
