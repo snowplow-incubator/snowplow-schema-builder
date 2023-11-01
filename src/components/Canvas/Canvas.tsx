@@ -57,7 +57,7 @@ export default function Canvas({ id }: string) {
                 <AdsClickIcon />
             </IconButton>
             <Typography sx={{ fontSize: 14 }} variant="body2" color="text.secondary" gutterBottom>
-                {trackingScenario.events[0].description}
+                {trackingScenario.events[0].schema.split("/")[1]}
             </Typography>
             <Typography sx={{ fontSize: 14 }} variant="body2" color="text.secondary" gutterBottom>
                 Entities Tracked {trackingScenario.entities.length}

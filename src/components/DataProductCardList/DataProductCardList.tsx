@@ -39,7 +39,7 @@ function DataProductCard(dataProduct: any) {
                     <Typography className={styles.pill}>
                         Product
                     </Typography>
-                    <Typography noWrap={true} className={styles.description} variant="body2">
+                    <Typography className={styles.description} variant="body2">
                         {dataProduct.dataProduct.description}
                     </Typography>
                     <CardActions >
