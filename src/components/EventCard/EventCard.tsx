@@ -24,25 +24,6 @@ export default function EventCard({ trackingScenario, params }: Props) {
 
 
     const entitiesVal = (trackingScenario?.entities?.tracked ? trackingScenario?.entities?.tracked.length : 0) + (trackingScenario?.entities?.enriched ? trackingScenario?.entities?.enriched.length : 0)
-    const handleCreateTrackingScenario = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        console.log(e.target.name.value)
-        // e.name
-        const trackingScenario: any = await fetch(`http://localhost:3001/api/data-products/${e.target.id.value}`, {
-            method: 'PUT',
-            body: JSON.stringify({
-                name: e.target.name.value,
-                schema: e.target.schema.value,
-                description: e.target.description.value,
-                id: e.target.id.value,
-                version: e.target.version.value,
-            })
-        }).then((res) => res.json())
-        setName("")
-        setSchema("")
-        setDescription("")
-        console.log(trackingScenario)
-    }
 
     const handleUpdateTrackingScenario = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -139,6 +120,7 @@ export default function EventCard({ trackingScenario, params }: Props) {
                         defaultValue={trackingScenario.description}
                         fullWidth
                     />
+                    <br />
                     <TextField
                         required
                         id="outlined"
@@ -148,6 +130,7 @@ export default function EventCard({ trackingScenario, params }: Props) {
                         defaultValue={trackingScenario.id}
                         fullWidth
                     />
+                    <br />
                     <TextField
                         required
                         id="outlined"
@@ -163,6 +146,6 @@ export default function EventCard({ trackingScenario, params }: Props) {
                     <Button onClick={() => handleDelete(trackingScenario.id)}>DELETE</Button>
                 </Box>
             </Drawer>
-        </Card>
+        </Card >
     )
 }
