@@ -1,74 +1,91 @@
-import { NextResponse } from "next/server"
-import { version } from "os"
+// import { NextResponse } from "next/server"
+// import { version } from "os"
 
-// Get data product by ID
-export async function GET() {
-    const res = await fetch(`${process.env.HOMEPAGE}/organizations/${process.env.ORGANIZATION_ID}/data-products/v1/32b1a470-8d5a-4c3e-bfef-a0121cef73e2`, {
-        method: 'GET',
-        headers: {
-            "accept": "application/json",
-            "Authorization": `Bearer ${process.env.ACCESS_TOKEN}`
-        }
-    }
-    )
-    const data = await res.json()
-    return NextResponse.json(data)
-}
+// // Get data product by ID
+// export async function GET() {
+//     const res = await fetch(`${process.env.HOMEPAGE}/organizations/${process.env.ORGANIZATION_ID}/data-products/v1/32b1a470-8d5a-4c3e-bfef-a0121cef73e2`, {
+//         method: 'GET',
+//         headers: {
+//             "accept": "application/json",
+//             "Authorization": `Bearer ${process.env.ACCESS_TOKEN}`
+//         }
+//     }
+//     )
+//     const data = await res.json()
+//     return NextResponse.json(data)
+// }
 
-export async function POST(req: Request) {
-    const userInput = await req.json()
-    const res = await fetch(`${process.env.HOMEPAGE}/organizations/${process.env.ORGANIZATION_ID}/tracking-scenarios/v1`, {
-        method: 'POST',
-        headers: {
-            "accept": "application/json",
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${process.env.ACCESS_TOKEN}`
+// export async function POST(req: Request) {
+//     const userInput = await req.json()
+//     const res = await fetch(`${process.env.HOMEPAGE}/organizations/${process.env.ORGANIZATION_ID}/tracking-scenarios/v1`, {
+//         method: 'POST',
+//         headers: {
+//             "accept": "application/json",
+//             "Content-Type": "application/json",
+//             "Authorization": `Bearer ${process.env.ACCESS_TOKEN}`
 
-        },
-        body: JSON.stringify({
-            "scenario": {
-                "dataProductId": userInput.dataProductId,
-                "name": userInput.name,
-                "description": userInput.description,
-                "event": {
-                    "source": "iglu:com.test/diana_test2/jsonschema/1-0-1",
-                }
-            },
-            "message": "update",
-        }),
-    })
-    const data = await res.json()
-    return NextResponse.json(data)
-}
+//         },
+//         body: JSON.stringify({
+//             "scenario": {
+//                 "dataProductId": userInput.dataProductId,
+//                 "name": userInput.name,
+//                 "description": userInput.description,
+//                 "event": {
+//                     "source": "iglu:com.test/diana_test2/jsonschema/1-0-1",
+//                 }
+//             },
+//             "message": "update",
+//         }),
+//     })
+//     const data = await res.json()
+//     return NextResponse.json(data)
+// }
 
-export async function PUT(req: Request) {
-    const userInput = await req.json()
-    const res = await fetch(`${process.env.HOMEPAGE}/organizations/${process.env.ORGANIZATION_ID}/tracking-scenarios/v1/${userInput.id}`, {
-        method: 'PUT',
-        headers: {
-            "accept": "application/json",
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${process.env.ACCESS_TOKEN}`
+// export async function PUT(req: Request) {
+//     const userInput = await req.json()
+//     console.log(userInput)
+//     const res = await fetch(`${process.env.HOMEPAGE}/organizations/${process.env.ORGANIZATION_ID}/tracking-scenarios/v1/${userInput.id}`, {
+//         method: 'PUT',
+//         headers: {
+//             "accept": "application/json",
+//             "Content-Type": "application/json",
+//             "Authorization": `Bearer ${process.env.ACCESS_TOKEN}`
 
-        },
-        body: JSON.stringify({
-            "scenario": {
-                "id": userInput.id,
-                "dataProductId": "d504c1a9-647c-4997-857a-f4376827adf1",
-                "version": userInput.version,
-                "name": userInput.name,
-                "description": userInput.description,
-                "event": {
-                    "source": "iglu:com.test/diana_test2/jsonschema/1-0-1",
-                },
-                "status": "draft"
-            },
-            "message": "update",
-        }),
-    })
-    const data = await res.json()
-    return NextResponse.json(data)
-}
+//         },
+//         body: JSON.stringify({
+//             "scenario": {
+//                 "id": userInput.id,
+//                 "dataProductId": userInput.dataProductId,
+//                 "version": userInput.version,
+//                 "name": userInput.name,
+//                 "description": userInput.description,
+//                 "event": {
+//                     "source": "iglu:com.test/diana_test2/jsonschema/1-0-1",
+//                 },
+//                 "entities": {
+//                     "tracked": [
+//                         {
+//                             "source": "iglu:com.snowplowanalytics.snowplow/web_page/1-0-0",
+//                             "minCardinality": 1,
+//                             "maxCardinality": 1
+//                         }
+//                     ],
+//                     "enriched": [
+//                         {
+//                             "source": "iglu:com.snowplowanalytics.snowplow/ua_parser_context/1-0-0",
+//                             "minCardinality": 1,
+//                             "maxCardinality": 1
+//                         }
+//                     ],
+//                 },
+//                 "status": "draft"
+//             },
+//             "message": "update",
+//         }),
+//     })
+//     const data = await res.json()
+//     return NextResponse.json(data)
+// }
 
 // export async function DELETE() {
 //     const res = await fetch(`${process.env.HOMEPAGE}/organizations/${process.env.ORGANIZATION_ID}/tracking-scenarios/v1/00dcfd02-7db2-4fc9-90a5-45769cb2e03f`, {
