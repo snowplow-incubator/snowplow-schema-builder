@@ -3,6 +3,7 @@
 import { Card, CardContent, Typography, CardActions, Button, IconButton, Drawer, Box, TextField, Grid, Link } from "@mui/material"
 import React, { useState } from "react"
 import { useDataProductsList } from "@/hooks";
+import styles from './DataProductCardList.module.css'
 
 export default function DataProductCardList() {
     const { dataProductsList, isLoading, error } = useDataProductsList()
@@ -12,14 +13,14 @@ export default function DataProductCardList() {
         )
     }
     return (
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        <Grid className={styles.grid} container rowSpacing={3} columnSpacing={3}>
             {dataProductsList.data.map((dataProduct: any) => (
                 <DataProductCard key={dataProduct.id} dataProduct={dataProduct} />
             ))}
-            <Grid item xs={4}>
-                <Card sx={{ width: 320, height: 290 }}>
+            <Grid item >
+                <Card className={styles.createCard} sx={{ width: 373, height: 323 }}>
                     <CardContent>
-                        <Button variant="contained"><Link href={`/data-products/templates`}>Create New Data Product</Link></Button>
+                        <Link className={styles.button} underline="none" component="button" ><Link className={styles.button} underline="none" href={`/data-products/templates`}>Create New Data Product</Link></Link>
                     </CardContent>
                 </Card>
             </Grid>
@@ -30,21 +31,21 @@ export default function DataProductCardList() {
 function DataProductCard(dataProduct: any) {
     return (
         <Grid item >
-            <Card sx={{ width: 320, height: 290 }}>
-                <CardContent>
-                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+            <Card className={styles.card} sx={{ width: 373, height: 323 }}>
+                <CardContent >
+                    <Typography className={styles.header}>
                         {dataProduct.dataProduct.name}
                     </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        product
+                    <Typography className={styles.pill}>
+                        Product
                     </Typography>
-                    <Typography variant="body2">
+                    <Typography noWrap={true} className={styles.description} variant="body2">
                         {dataProduct.dataProduct.description}
                     </Typography>
+                    <CardActions >
+                        <Link className={styles.link} underline="none" component="button" ><Link className={styles.text} underline="none" href={`/data-products/${dataProduct.dataProduct.id}`}>Explore Me</Link></Link>
+                    </CardActions>
                 </CardContent>
-                <CardActions>
-                    <Link href={`/data-products/${dataProduct.dataProduct.id}`}>Explore</Link>
-                </CardActions>
             </Card>
         </Grid>
     )

@@ -1,6 +1,6 @@
 'use client'
 
-import { Card, CardContent, Typography, CardActions, Button, IconButton, Drawer, Box, TextField } from "@mui/material"
+import { Card, CardContent, Typography, CardActions, Button, IconButton, Drawer, Box, TextField, Checkbox, FormControlLabel } from "@mui/material"
 import React, { useState } from "react"
 import Draggable from "react-draggable"
 import AdsClickIcon from '@mui/icons-material/AdsClick';
@@ -22,27 +22,39 @@ export default function EventCard({ trackingScenario, params }: Props) {
     const [schema, setSchema] = useState("")
     const [description, setDescription] = useState("")
 
+    const [entities, setEntities] = useState([]);
+
+    const handleCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setEntities({
+            ...entities,
+            [event.target.name]: event.target.checked,
+        });
+        ;
+    };
+
+
+    console.log(trackingScenario)
+
 
     const entitiesVal = (trackingScenario?.entities?.tracked ? trackingScenario?.entities?.tracked.length : 0) + (trackingScenario?.entities?.enriched ? trackingScenario?.entities?.enriched.length : 0)
 
     const handleUpdateTrackingScenario = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        console.log(e.target.name.value)
-        // e.name
-        const trackingScenario: any = await fetch(`http://localhost:3001/api/data-products/${e.target.id.value}`, {
+        const trackingScenario: any = await fetch(`http://localhost:3001/api/data-products/${params.id}`, {
             method: 'PUT',
             body: JSON.stringify({
+                dataProductId: params.id,
                 name: e.target.name.value,
                 schema: e.target.schema.value,
                 description: e.target.description.value,
                 id: e.target.id.value,
                 version: e.target.version.value,
+                entities: entities
             })
         }).then((res) => res.json())
         setName("")
         setSchema("")
         setDescription("")
-        console.log(trackingScenario)
     }
     const handleDelete = async (id) => {
         console.log("id")
@@ -141,6 +153,9 @@ export default function EventCard({ trackingScenario, params }: Props) {
                         fullWidth
                     />
                     <br />
+                    <FormControlLabel control={<Checkbox onChange={handleCheckbox} />} label="user" name="user" />
+                    <FormControlLabel control={<Checkbox onChange={handleCheckbox} />} label="product" name="product" />
+
                     <Button type="submit">Save</Button>
                     <br />
                     <Button onClick={() => handleDelete(trackingScenario.id)}>DELETE</Button>
