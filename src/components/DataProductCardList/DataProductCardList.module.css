@@ -1,0 +1,82 @@
+.grid {
+    padding-top: 25px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    position: relative;
+
+}
+
+.header {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    color: #1D2939;
+    padding: 5px;
+}
+
+.pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #D4C7EB;
+    border-radius: 4px;
+    width: 58px;
+    height: 25px;
+    color: #2F1A55;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 5px;
+}
+
+.description {
+    color: #1D2939;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 5px;
+    line-height: 20px;
+}
+
+.link {
+    color: #412476;
+    background-color: #F0EBF8;
+    padding: 8px, 12px, 8px, 12px;
+    width: 94px;
+    height: 36px;
+    text-decoration: none !important;
+    border-radius: 4px;
+    font-size: 14px;
+    justify-self: baseline;
+    position: absolute;
+    bottom: 30px;
+    left: 20px;
+
+}
+
+.createCard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F2F4F7;
+    border: dashed 3px #D0D5DD;
+    box-shadow: none;
+}
+
+.button {
+    background-color: #6638B8;
+    color: #FFF;
+    padding: 12px, 16px, 12px, 16px;
+    border-radius: 4px;
+    width: 187px;
+    height: 44px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+.text {
+    color: #412476;
+}
