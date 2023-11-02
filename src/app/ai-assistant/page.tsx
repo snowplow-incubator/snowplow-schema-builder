@@ -121,7 +121,7 @@ function PageContent() {
         {loading ? (
           "Loading..."
         ) : (
-          <Button onClick={callApi} variant="contained">
+          <Button size="large" onClick={callApi} variant="contained">
             ⚙️ Generate events and entities
           </Button>
         )}
@@ -152,9 +152,28 @@ function PageContent() {
 }
 
 export default function AIAssistantPage() {
+  const [open, setOpen] = useState(false);
     return (
       <main className={styles.main}>
-        <PageContent />
+        {open ? (
+          <PageContent />
+        ) : (
+          <Grid container spacing={2}>
+            <Grid xs={12}>
+              <h1>🪄 AI Assistant</h1>
+            </Grid>
+            <Grid xs={12}>
+              <p>
+                The Snowplow AI assistant is a tool that
+                can help you create a data product by
+                generating the events and entities for you.
+              </p>
+            </Grid>
+            <Grid xs={12}>
+              <Button variant="contained" size="large" color="success" onClick={() => setOpen(true)}>Open AI assistant</Button>
+            </Grid>
+          </Grid>
+        )}
       </main>
     );
 }
