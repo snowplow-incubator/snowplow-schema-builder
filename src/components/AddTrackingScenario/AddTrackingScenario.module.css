@@ -1,4 +1,55 @@
 .form {
     display: 'flex';
     flex-direction: column;
+    padding: 10px;
+}
+
+.card {
+    display: flex;
+    position: absolute;
+    bottom: 30px;
+    left: 29%;
+    justify-content: center;
+    background-color: #fff;
+    width: 600px;
+    height: 76px;
+    align-items: center;
+
+}
+
+.button {
+    color: #1D2939;
+    margin: 10px;
+    border: solid 1px #D0D5DD;
+    background-color: #fff;
+    font-size: 14px;
+    border-radius: 4px;
+    width: 170px;
+    height: 44px;
+    text-transform: none !important;
+
+}
+
+.aiButton {
+    color: #fff;
+    margin: 10px;
+    border: solid 1px #D0D5DD;
+    background-color: #1D2939;
+    font-size: 14px;
+    border-radius: 4px;
+    width: 170px;
+    height: 44px;
+    text-transform: none !important;
+}
+
+.aiButton:hover {
+    color: #fff;
+    margin: 10px;
+    border: solid 1px #D0D5DD;
+    background-color: #1D2939;
+    font-size: 14px;
+    border-radius: 4px;
+    width: 170px;
+    height: 44px;
+    text-transform: none !important;
 }

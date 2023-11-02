@@ -63,7 +63,6 @@ export default async function TemplatesPage() {
 }
 
 function DataProductTemplateList(dataProduct: any) {
-    console.log(dataProduct.dataProduct)
     return (
         <Grid key={dataProduct.dataProduct.data[0].id} item >
             <Card className={styles.card} sx={{ width: 564, height: 192 }}>
