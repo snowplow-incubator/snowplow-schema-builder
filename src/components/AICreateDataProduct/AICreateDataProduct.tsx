@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 import {
   TextField,
@@ -67,7 +68,18 @@ export default function AICreateDataProduct({
           properties: entity.properties,
         };
       }),
-      trackingScenarios: [],
+      trackingScenarios: events.map((event) => {
+        return {
+          id: uuidv4(),
+          dataProductId: id,
+          status: "published",
+          name: event.name,
+          description: event.description,
+          schema: event.schema,
+          event: event,
+          entities: [],
+        }
+      }),
     };
 
     const listOfTrackingScenarios = JSON.parse(localStorage.getItem(id) || '[]');
