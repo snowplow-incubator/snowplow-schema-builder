@@ -50,7 +50,7 @@ export default async function TemplatesPage() {
                                     <AutoFixHighIcon
                                         aria-label="menu"
                                         sx={{ mr: 2, color: common["white"] }} />
-                                    <Link className={styles.aiText} underline="none" href={`/data-products/ai`}>
+                                    <Link className={styles.aiText} underline="none" href={`/ai-assistant`}>
                                         Use AI Assistant
                                     </Link></Button>
                             </CardActions>
