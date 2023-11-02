@@ -97,7 +97,7 @@ export default function Canvas({ id }: string) {
     // ))}
     return (
         <>
-            <Button className={styles.button} href="/data-products/"><FileUploadOutlinedIcon />Publish</Button>
+            <Button className={styles.button} href="/publish"><FileUploadOutlinedIcon />Publish</Button>
             <Grid
                 container
                 alignItems={"flex-start"}
