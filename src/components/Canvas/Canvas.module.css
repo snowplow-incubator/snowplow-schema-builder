@@ -5,6 +5,58 @@
     background-color: #FFF;
     align-items: center;
     justify-content: center;
+    border-radius: 4px;
+
 }
 
-.title {}
+.entity {
+    display: flex;
+    border: solid 1px #D0D5DD;
+    background-color: #FFF;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    height: 40px;
+    flex-direction: column;
+    margin: 9px;
+}
+
+.entityGrid {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #D0D5DD;
+    border-radius: 4px;
+
+}
+
+.button {
+    color: #fff;
+    margin: 10px;
+    border: solid 1px #D0D5DD;
+    background-color: #6638B8;
+    font-size: 14px;
+    border-radius: 4px;
+    width: 140px;
+    height: 44px;
+    text-transform: none !important;
+    position: absolute;
+    bottom: 25px;
+
+
+}
+
+.button:hover {
+    color: #fff;
+    margin: 10px;
+    border: solid 1px #D0D5DD;
+    background-color: #6638B8;
+    font-size: 14px;
+    border-radius: 4px;
+    width: 140px;
+    height: 44px;
+    text-transform: none !important;
+    position: absolute;
+    bottom: 25px;
+
+
+}
