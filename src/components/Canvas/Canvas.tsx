@@ -196,13 +196,11 @@ export default function Canvas({ id }: string) {
                                 rowGap={1}
                             >
                                 {trackingScenario.entities.map((entity) => (
-                                    <Grid className={styles.entity} item>{entity.description}</Grid>
+                                    <Grid className={styles.entity} item>{entity.schema.split("/")[1]}</Grid>
                                 ))}
                             </Grid>
                         </Grid>
-
                     </Draggable>
-
                 ))}
             </Grid>
         </>
