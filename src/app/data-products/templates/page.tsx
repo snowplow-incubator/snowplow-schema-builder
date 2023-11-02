@@ -1,11 +1,9 @@
 import CreateDataProduct from "@/components/CreateDataProduct/CreateDataProduct";
-// import CreateDataProductFromTemplate from "@/components/CreateDataProductFromTemplate/CreateDataProductFromTemplate";
-import { DataProduct } from "@/data/types";
 import { Grid, Card, CardContent, Typography, CardActions, Button } from "@mui/material";
 import Link from "next/link";
 import styles from './page.module.css'
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
-import { common, green } from "@mui/material/colors";
+import { common } from "@mui/material/colors";
 
 export default async function TemplatesPage() {
 

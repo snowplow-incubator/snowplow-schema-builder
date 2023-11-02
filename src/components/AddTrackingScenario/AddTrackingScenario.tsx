@@ -1,6 +1,6 @@
 "use client"
 
-import { Card, Drawer, Box, TextField, Button, ButtonGroup } from "@mui/material"
+import { Card, Drawer, Box, TextField, Button, ButtonGroup, FormControlLabel, Checkbox } from "@mui/material"
 import { useState } from "react"
 import styles from './AddTrackingScenario.module.css'
 import { v4 as uuidv4 } from 'uuid';
@@ -17,49 +17,81 @@ export default function AddTrackingScenario({ id }: Props) {
     const [entityDescription, setEntityDescription] = useState("")
     const [entityType, setEntityType] = useState("")
     const [entities, setEntities] = useState([])
+    const [events, setEvents] = useState([])
+    // const [trackingScenarios, setTrackingScenarios] = useState([])
 
     const [open, setOpen] = useState(false);
     function toggleDrawer() { setOpen(!open) };
     const [openEntity, setOpenEntity] = useState(false);
     function toggleEntityDrawer() { setOpenEntity(!openEntity) };
 
+    if (localStorage.getItem(id) === null) {
+        localStorage.setItem(id, JSON.stringify({ events: [], entities: [], trackingScenarios: [] }))
+    }
+    const localStorageData = JSON.parse(localStorage.getItem(id))
+
+    const handleCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setEntities({
+            ...entities,
+            [event.target.name]: event.target.checked,
+        });
+        console.log("entities")
+        console.log(entities)
+    };
+
+    const trackingScenarios = localStorageData.trackingScenarios
+    // console.log(trackingScenarios)
+
     const handleAddEvent = async (e: React.FormEvent<HTMLFormElement>) => {
-        const trackingScenario = {
-            "events": [
+
+        const event = {
+            "schema": `iglu:com.snowplowanalytics.snowplow/${eventName}/jsonschema/1-0-0`,
+            "description": eventDescription,
+            "properties": [
                 {
-                    "schema": `iglu:com.snowplowanalytics.snowplow/${eventName}/jsonschema/1-0-0`,
+                    "name": eventName,
                     "description": eventDescription,
-                    "properties": [
-                        {
-                            "name": eventName,
-                            "description": eventDescription,
-                            "type": eventType,
-                        }
-                    ]
+                    "type": eventType,
                 }
-            ],
-            "entities": entities,
-            "trackingScenarios": [
             ]
         }
 
-        if (localStorage.getItem(id) === null) {
-            localStorage.setItem(id, JSON.stringify([]))
+        const trackingScenario =
+        {
+            "id": "d1336abc-1b60-46f7-be2d-2105f2daf283",
+            "version": 27,
+            "status": "published",
+            "name": "Search",
+            "appIds": [
+                "ios",
+                "android"
+            ],
+            "owner": "51982e6e-af2e-426e-b50e-9893b1dcdbdd",
+            "description": "Tracking the use of the search box",
+            "triggers": [
+                "On the homepage, when the user types in the search box"
+            ],
+            "event": event,
+            "entities": entities,
+            "author": "30eae886-b8de-4411-9ce2-32fe5ecda610",
+            "message": "Fixed errors",
+            "date": "2023-04-25T14:27:10.184187Z"
         }
-        const listOfTrackingScenarios = JSON.parse(localStorage.getItem(id))
-        listOfTrackingScenarios.push(trackingScenario)
 
-        localStorage.setItem(id, JSON.stringify(listOfTrackingScenarios))
+        if (localStorage.getItem(id) === null) {
+            localStorage.setItem(id, JSON.stringify({ events: [], entities: [], trackingScenarios: [] }))
+        }
+        const localStorageData = JSON.parse(localStorage.getItem(id))
 
-        setEventName("")
-        setEventDescription("")
-        setEventType("")
+        localStorageData.events.push(event)
+        localStorageData.trackingScenarios.push(trackingScenario)
+        localStorage.setItem(id, JSON.stringify(localStorageData))
+
     }
 
     const handleCreateEntity = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const id = uuidv4()
-        const entity = JSON.stringify({
+        const entity = {
             "schema": `iglu:com.snowplowanalytics.snowplow/${entityName}/jsonschema/1-0-0`,
             "description": `${entityDescription}`,
             "properties": [
@@ -69,29 +101,28 @@ export default function AddTrackingScenario({ id }: Props) {
                     "type": `${entityType}`,
                 }
             ]
-        })
+        }
 
-        console.log("entities")
-        setEntities([...entities, entity])
-        console.log(entities)
+        if (localStorage.getItem(id) === null) {
+            localStorage.setItem(id, JSON.stringify({ events: [], entities: [], trackingScenarios: [] }))
+        }
 
-
-
-
-
-        setEntityDescription("")
-        setEntityName("")
-        setEntityType("")
+        const localStorageData = JSON.parse(localStorage.getItem(id))
+        localStorageData.entities.push(entity)
+        localStorage.setItem(id, JSON.stringify(localStorageData))
     }
+
+    const publishedEntities = JSON.parse(localStorage.getItem(id)).entities
+    console.log(publishedEntities)
 
 
     return (
-        <Card sx={{ width: 250, height: 70, position: 'fixed', bottom: 0 }} >
-            <ButtonGroup>
-                <Button onClick={toggleDrawer}>
+        <Card>
+            <ButtonGroup className={styles.card} >
+                <Button className={styles.button} onClick={toggleDrawer}>
                     Create New Event
                 </Button>
-                <Button onClick={toggleEntityDrawer}>
+                <Button className={styles.button} onClick={toggleEntityDrawer}>
                     Create New Entity
                 </Button>
             </ButtonGroup>
@@ -130,6 +161,14 @@ export default function AddTrackingScenario({ id }: Props) {
                         onChange={(e) => setEventDescription(e.target.value)}
                     />
                     <br />
+
+                    {publishedEntities.map((entity) =>
+                        <FormControlLabel control={<Checkbox onChange={handleCheckbox} />} label={entity.properties[0].name} name={entity.properties[0].name} />)
+                    }
+
+
+
+
                     <Button type="submit">Save</Button>
 
                 </Box>
@@ -184,12 +223,9 @@ export default function AddTrackingScenario({ id }: Props) {
                         fullWidth
                         onChange={(e) => setEntityType(e.target.value)}
                     />
-
                     <br />
                     <Button type="submit">Save</Button>
-
                 </Box>
-
             </Drawer>
         </Card>
     )

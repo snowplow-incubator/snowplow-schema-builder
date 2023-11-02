@@ -22,17 +22,3 @@ export async function POST(req: Request) {
     const data = await res.json()
     return NextResponse.json(data)
 }
-
-
-// export async function GET() {
-//     const res = await fetch(`${process.env.HOMEPAGE}/organizations/${process.env.ORGANIZATION_ID}/data-products/v1`, {
-//         method: 'GET',
-//         headers: {
-//             "accept": "application/json",
-//             "Authorization": `Bearer ${process.env.ACCESS_TOKEN}`
-//         }
-//     }
-//     )
-//     const data = await res.json()
-//     return NextResponse.json(data.data)
-// }
